@@ -5,16 +5,17 @@ import { genToken } from "../config/token.js"
 
 export const registeration=async(req,res)=>{
     try {
+        console.log(req.body);
         const{name,email,password}=req.body
         const exitsUser=await User.findOne({email})
         if (exitsUser) {
-            res.status(400).json({message:"User Already Exits!"})
+            return res.status(400).json({message:"User Already Exits!"})
         }
         if(!validator.isEmail(email)){
-            res.status(400).json({message:"Enter Valid Email"})
+            return res.status(400).json({message:"Enter Valid Email"})
         }
         if(password.length<8){
-            res.status(400).json({message:"Password Must Be 8 Characters Long"})
+            return res.status(400).json({message:"Password Must Be 8 Characters Long"})
         }
         const hashPassword=await bcrypt.hash(password,10)
 
@@ -71,5 +72,32 @@ export const logout=async(req,res)=>{
     } catch (error) {
         console.log("Logout Error");
         return res.status(500).json({messge:`Logout Error ${error}`})
+    }
+}
+
+
+export const googleLogin=async(req,res)=>{
+    try {
+        const { name, email } = req.body;
+        let user=await User.findOne({email})
+
+         if(!user){
+            user=await User.create({
+                name,email
+            })
+        }
+      
+        let token=await genToken(user._id)
+        res.cookie("token",token,{
+            httpOnly:true,
+            secure:false,
+            sameSite:"Strict",
+            maxAge:7*4*60*60*1000
+        })
+
+        return res.status(200).json(user)
+    } catch (error) {
+        console.log("GoogleLogin Error");
+        return res.status(500).json({message:`GoogleLogin Error ${error}`})
     }
 }
