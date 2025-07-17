@@ -7,6 +7,7 @@ import { authDataContext } from "../context/authContext";
 import axios from 'axios'
 import { auth, provider } from "../../utils/Firebase";
 import { signInWithPopup } from "firebase/auth";
+import { userDataContext } from "../context/UserContext";
 
 
 function Login() {
@@ -15,6 +16,7 @@ function Login() {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let { serverUrl } = useContext(authDataContext);
+  let {getCurrentUser}=useContext(userDataContext)
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -24,6 +26,8 @@ function Login() {
         },{withCredentials:true})
         console.log(result.data);
         console.log("Login Successfull");
+        getCurrentUser()
+        navigate('/')
     } catch (error) {
         console.log(error);
     }

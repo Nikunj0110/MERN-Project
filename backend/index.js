@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import authRoutes from './routes/authRoutes.js';
 import cors from 'cors';
 import { compare } from 'bcryptjs';
+import userRoutes from './routes/userRoutes.js';
 
 let app=express()
 dotenv.config()
@@ -18,6 +19,8 @@ app.use(cors({
 }))
 
 app.use("/api/auth",authRoutes)
+app.use("/api/user",userRoutes)
+
 
 app.listen(port,()=>{
     console.log("App Started");

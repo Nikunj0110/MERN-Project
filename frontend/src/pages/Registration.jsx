@@ -7,6 +7,8 @@ import { authDataContext } from "../context/authContext";
 import axios from "axios";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../utils/Firebase";
+import { userDataContext } from "../context/UserContext";
+
 
 function Registration() {
   let navigate = useNavigate();
@@ -15,6 +17,8 @@ function Registration() {
   let [name, setName] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
+  let {getCurrentUser}=useContext(userDataContext)
+  
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -29,6 +33,8 @@ function Registration() {
         { withCredentials: true }
       );
       console.log(result.data);
+      getCurrentUser()
+      navigate('/')
     } catch (error) {
       console.log(error);
     }
