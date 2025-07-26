@@ -1,8 +1,6 @@
 import User from "../model/userModel.js"
 
 
-
-
 export const getCurrentUser=async(req,res)=>{
     try {
         let user=await User.findById(req.userId).select("-password")
@@ -15,5 +13,22 @@ export const getCurrentUser=async(req,res)=>{
     } catch (error) {
            console.log(error);
          return res.status(500).json({message:`GetCurrentUser Error ${error}`})
+    }
+}
+
+
+export const getAdmin=async(req,res)=>{
+    try {
+        let adminEmail=req.adminEmail;
+        if(!adminEmail){
+        return res.status(404).json({message:"Admin is not Found"})
+        }
+
+        return res.status(201).json({
+            email:adminEmail,
+            role:"admin"
+        })
+    } catch (error) {
+         return res.status(500).json({message:`GetAdmin Error ${error}`})
     }
 }
