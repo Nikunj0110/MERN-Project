@@ -62,12 +62,12 @@ const MobileSlider = () => {
   };
 
   return (
-    <div className="w-full h-screen relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-200">
+    <div className="w-full min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-200">
       {/* Main Slider Container */}
       <div className="relative w-full h-full flex items-center justify-center">
         {/* Slide Content */}
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center justify-between h-full py-20">
+          <div className="flex flex-col lg:flex-row items-center justify-between py-20">
             
             {/* Text Content - Left Side */}
             <div className="w-full lg:w-1/2 text-center lg:text-left mb-10 lg:mb-0 lg:pr-12">

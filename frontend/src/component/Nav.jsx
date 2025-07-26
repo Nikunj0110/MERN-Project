@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import logo from "../assets/logo.png";
+import logo from "../assets/main.png";
 import { FaSearch } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
@@ -35,12 +35,10 @@ function Nav() {
 
   return (
     <div className="w-[100vw] h-[60px] z-10 fixed top-0 flex items-center justify-between md:px-[30px] px-[10px] bg-white shadow-lg shadow-gray-200 border-b border-gray-100 backdrop-blur-sm">
-      <div className="md:w-[30%] w-[50%] flex items-center gap-[8px]">
-        <div className="w-[40px] h-[40px] bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-md">
-          <img src={logo} className="w-[24px] h-[24px] object-contain" />
-        </div>
-        <h1 className="text-[26px] font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent tracking-tight">
-          Speak Deals
+      <div className="md:w-[30%] w-[50%] flex items-center">
+          <img src={logo} className="w-[40px] h-[40px]" />
+        <h1 className="text-[26px] font-semibold  bg-clip-text text-black tracking-tight -ml-2">
+          peak Deals
         </h1>
       </div>
 
