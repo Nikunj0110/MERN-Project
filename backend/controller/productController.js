@@ -3,31 +3,43 @@ import Product from "../model/productModel.js";
 
 export const addProduct = async (req, res) => {
   try {
-    let { name, description, price, category, subCategory, bestseller } =
-      req.body;
-    let image1 = await uploadOnCloudinary(req.files.image1[0].path);
-    let image2 = await uploadOnCloudinary(req.files.image2[0].path);
-    let image3 = await uploadOnCloudinary(req.files.image3[0].path);
-    let image4 = await uploadOnCloudinary(req.files.image4[0].path);
+    const { name, description, price, category, bestseller } = req.body;
 
-    let productData = {
+    if (!name || !description || !price || !category || !bestseller) {
+      return res.status(400).json({ message: 'Missing required fields or files' });
+    }
+
+    const requiredImages = ['image1', 'image2', 'image3', 'image4'];
+    for (let img of requiredImages) {
+      if (!req.files[img] || !req.files[img][0]) {
+        return res.status(400).json({ message: `Missing image: ${img}` });
+      }
+    }
+
+    let uploadedImages = {};
+    try {
+      uploadedImages.image1 = await uploadOnCloudinary(req.files?.image1[0]?.path);
+      uploadedImages.image2 = await uploadOnCloudinary(req.files?.image2[0]?.path);
+      uploadedImages.image3 = await uploadOnCloudinary(req.files?.image3[0]?.path);
+      uploadedImages.image4 = await uploadOnCloudinary(req.files?.image4[0]?.path);
+    } catch (uploadError) {
+      return res.status(500).json({ message: "Image upload failed", error: uploadError.message });
+    }
+
+    const product = await Product.create({
       name,
       description,
       price: Number(price),
       category,
-      bestseller: bestseller === "true" ? true : false,
+      bestseller: bestseller === "true",
       date: Date.now(),
-      image1,
-      image2,
-      image3,
-      image4,
-    };
+      ...uploadedImages
+    });
 
-    const product = await Product.create(productData);
     return res.status(201).json(product);
   } catch (error) {
-    console.log("Product Error",error);
-    return res.status(500).json({ message: `Add product Error ${error}` });
+    console.error("Product creation error:", error);
+    return res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
 

@@ -1,15 +1,22 @@
-import multer from 'multer'
+import multer from 'multer';
+import fs from 'fs';
 
-let storage=multer.diskStorage({
-    destination:(req,file,cb)=>{
-        cb(null,"./public")
+const uploadDir = './public';
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir);
+}
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, uploadDir);
     },
-    filename:(req,file,cb)=>{
-        cb(null,file.originalname)
+    filename: (req, file, cb) => {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+        const originalName = file.originalname.replace(/\s+/g, '-');
+        cb(null, `${uniqueSuffix}-${originalName}`);
     }
-})
+});
 
-let upload=multer({storage})
+const upload = multer({ storage });
 
-export default upload
-
+export default upload;

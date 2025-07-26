@@ -16,8 +16,8 @@ productRoutes.post(
   addProduct
 );
 
-productRoutes.get('/list',listProduct)
-productRoutes.post('/remove/:id',adminAuth,removeProduct)
+productRoutes.get('/list', listProduct)
+productRoutes.post('/remove/:id', adminAuth, removeProduct)
 
 
 export default productRoutes
