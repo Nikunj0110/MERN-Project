@@ -6,18 +6,19 @@ import { IoCartOutline } from "react-icons/io5";
 import { userDataContext } from "../context/UserContext";
 import { BiSolidSearch } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
-import { authDataContext } from "../context/authContext";
+import { authDataContext } from '../context/AuthContext';
 import axios from "axios";
 import { GoHome } from "react-icons/go";
 
 import { HiOutlineCollection } from "react-icons/hi";
 import { RiContactsLine } from "react-icons/ri";
 import { FaOpencart } from "react-icons/fa";
+import { shopDataContext } from "../context/ShopContext";
 
 function Nav() {
   let { getCurrentUser, userData } = useContext(userDataContext);
   let { serverUrl } = useContext(authDataContext);
-  let [showSearch, setShowSearch] = useState(false);
+  let {showSearch, setShowSearch,search,setSearch,getCartCount} = useContext(shopDataContext);
   let [showProfile, setShowProfile] = useState(false);
   let navigate = useNavigate();
 
@@ -78,7 +79,7 @@ function Nav() {
           <div className="p-[10px] hover:bg-gray-100 rounded-full transition-all duration-300 cursor-pointer group">
             <FaSearch
               className="h-[20px] w-[20px] cursor-pointer text-gray-600 group-hover:text-blue-600 transition-colors duration-300"
-              onClick={() => setShowSearch((prev) => !prev)}
+              onClick={() => {setShowSearch((prev) => !prev);navigate('/collections')}}
             />
           </div>
         )}
@@ -113,7 +114,7 @@ function Nav() {
             <IoCartOutline className="h-[24px] w-[24px] cursor-pointer text-gray-600 group-hover:text-blue-600 transition-colors duration-300" />
           </div>
           <div className="absolute w-[20px] h-[20px] flex items-center justify-center bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-full text-[10px] font-bold top-[2px] right-[2px] shadow-md">
-            10
+            {getCartCount()}
           </div>
         </div>
       </div>
@@ -125,6 +126,8 @@ function Nav() {
               type="text"
               className="w-[100%] h-[50px] bg-gray-50 border-2 border-gray-200 focus:border-blue-500 focus:bg-white rounded-2xl px-[50px] pr-[50px] placeholder:text-gray-500 text-gray-800 font-medium text-[16px] outline-none transition-all duration-300 shadow-sm focus:shadow-md"
               placeholder="Search for products..."
+              onChange={(e)=>{setSearch(e.target.value)}}
+              value={search}
             />
             <BiSolidSearch className="absolute left-[18px] top-[50%] transform -translate-y-[50%] text-gray-400 w-[20px] h-[20px]" />
           </div>
@@ -200,7 +203,7 @@ function Nav() {
           <FaOpencart className="w-[24px] h-[24px]" />
           <span className="text-[10px] font-medium">Cart</span>
           <div className="absolute w-[18px] h-[18px] flex items-center justify-center bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-full text-[9px] font-bold top-[0px] right-[10px] shadow-md">
-            10
+            {getCartCount()}
           </div>
         </button>
       </div>

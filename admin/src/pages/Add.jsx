@@ -221,6 +221,7 @@ function Add() {
                   className="w-[60%] px-[10px] py-[7px] rounded-lg border-[2px]"
                   onChange={(e) => setCategory(e.target.value)}
                 >
+                  <option>Select</option>
                   <option value="Samsung">Samsung</option>
                   <option value="Apple">Apple</option>
                   <option value="Oppo">Oppo</option>

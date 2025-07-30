@@ -9,6 +9,7 @@ import Contact from './pages/Contact.jsx';
 import Product from './pages/Product.jsx';
 import { useContext } from 'react';
 import { userDataContext } from './context/UserContext.jsx';
+import ProductDetails from './pages/ProductDetails.jsx';
 
 function App() {
 let {userData}=useContext(userDataContext)
@@ -38,6 +39,14 @@ let location=useLocation()
       <Route path="/contact" element={<Contact />}/>
 
       <Route path="/product" element={<Product />}/>
+
+      <Route path="/productdetail/:productId" element={<ProductDetails/>} />
+
+      {/* <Route path="/productdetail/:productId"
+       element={
+       userData? <ProductDetails/> :<Navigate to="login" state={{from:location.pathname}}/>
+       }/> */}
+       
 
     </Routes>
     </>
