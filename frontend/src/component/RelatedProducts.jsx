@@ -21,7 +21,7 @@ function RelatedProducts({category,currentProductId}) {
         <Title text1={'Related'} text2={' Products'}/>    
         <hr className='rounded-full'/>   
     </div>
-    <div className='w-[100%] mt-[30px] flex items-center justify-center flex-wrap gap-[50px]'>
+    <div className='w-[100%] mt-[30px] flex items-center font-sans justify-center flex-wrap gap-[50px]'>
         {
             related.map((item,index)=>(
                 <Card key={index} id={item._id} name={item.name} price={item.price} image={item.image1}/>

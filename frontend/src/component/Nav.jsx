@@ -111,7 +111,7 @@ function Nav() {
         )}
         <div className="relative hidden lg:block">
           <div className="p-[10px] hover:bg-gray-100 rounded-full transition-all duration-300 cursor-pointer group">
-            <IoCartOutline className="h-[24px] w-[24px] cursor-pointer text-gray-600 group-hover:text-blue-600 transition-colors duration-300" />
+            <IoCartOutline onClick={()=>navigate('/cart')} className="h-[24px] w-[24px] cursor-pointer text-gray-600 group-hover:text-blue-600 transition-colors duration-300" />
           </div>
           <div className="absolute w-[20px] h-[20px] flex items-center justify-center bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-full text-[10px] font-bold top-[2px] right-[2px] shadow-md">
             {getCartCount()}
@@ -199,7 +199,7 @@ function Nav() {
           <RiContactsLine className="w-[24px] h-[24px]" />
           <span className="text-[10px] font-medium">Contact</span>
         </button>
-        <button className="text-gray-600 hover:text-blue-600 flex items-center justify-center flex-col gap-[4px] py-[10px] px-[8px] rounded-xl hover:bg-blue-50 transition-all duration-300 active:scale-95 relative min-w-[60px]">
+        <button onClick={()=>navigate('/cart')} className="text-gray-600 hover:text-blue-600 flex items-center justify-center flex-col gap-[4px] py-[10px] px-[8px] rounded-xl hover:bg-blue-50 transition-all duration-300 active:scale-95 relative min-w-[60px]">
           <FaOpencart className="w-[24px] h-[24px]" />
           <span className="text-[10px] font-medium">Cart</span>
           <div className="absolute w-[18px] h-[18px] flex items-center justify-center bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-full text-[9px] font-bold top-[0px] right-[10px] shadow-md">
