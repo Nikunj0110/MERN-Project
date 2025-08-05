@@ -1,10 +1,9 @@
-
-
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { shopDataContext } from "../context/ShopContext";
 import { FaStar, FaRegStar, FaShoppingCart } from "react-icons/fa";
 import RelatedProducts from "../component/RelatedProducts";
+
 
 function ProductDetails() {
   let { productId } = useParams();
@@ -16,6 +15,8 @@ function ProductDetails() {
   const [image3, setImage3] = useState("");
   const [image4, setImage4] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
+
+    
 
   const fetchProductData = async () => {
     products.map((item) => {

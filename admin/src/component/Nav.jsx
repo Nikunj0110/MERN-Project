@@ -4,6 +4,8 @@ import { useContext } from 'react'
 import {authDataContext} from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom';
 import {adminDataContext} from '../context/AdminContext'
+import { toast } from "react-toastify";
+
 
 
 function Nav() {
@@ -17,8 +19,10 @@ let {getAdmin}=useContext(adminDataContext)
       console.log(result.data);
       getAdmin()
       navigate('/login')
+      toast.success("Logout Success")
     } catch (error) {
       console.log(error);
+      toast.error("Logout Failed")
     }
   }
   return (

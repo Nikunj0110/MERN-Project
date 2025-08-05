@@ -7,15 +7,15 @@ function CartTotal() {
   return (
     <div className="w-full lg:ml-[30px]">
       <div className="text-xl py-[10px]">
-        <Title text1={"Cart"} text2={"Total"} />
+        <Title text1={"Cart"} text2={" Total"} />
       </div>
 
-      <div className="flex flex-col gap-2 mt-2 rounded-[30px] text-sm p-[30px] border-[2px] border-black">
+      <div className="flex flex-col gap-2 mt-2 bg-gray-100 rounded-2xl  text-sm p-[30px] ">
         <div className="flex justify-between text-black text-[18px] p-[10px]">
           <p>Subtotal</p>
           <p>
             {currency}
-            {getCartAmount()}.00
+            {getCartAmount().toLocaleString('en-IN')}.00 
           </p>
         </div>
         <hr />
@@ -32,7 +32,7 @@ function CartTotal() {
           <b>Total</b>
           <b>
             {currency}
-            {getCartAmount() === 0 ? 0 : getCartAmount() + delivery_fee}
+            {getCartAmount() === 0 ? 0 : getCartAmount().toLocaleString('en-IN')}
           </b>
         </div>
       </div>

@@ -3,11 +3,12 @@ import logo from "../assets/google.webp";
 import { useNavigate } from "react-router-dom";
 import { FiEye } from "react-icons/fi";
 import { FiEyeOff } from "react-icons/fi";
-import { authDataContext } from "../context/authContext";
+import { authDataContext } from "../context/AuthContext";
 import axios from 'axios'
 import { auth, provider } from "../../utils/Firebase";
 import { signInWithPopup } from "firebase/auth";
 import { userDataContext } from "../context/UserContext";
+import { toast } from "react-toastify";
 
 
 function Login() {
@@ -28,6 +29,8 @@ function Login() {
         console.log("Login Successfull");
         getCurrentUser()
         navigate('/')
+        
+
     } catch (error) {
         console.log(error);
     }
@@ -46,10 +49,13 @@ function Login() {
         console.log(result.data);
            getCurrentUser()
            navigate('/home')
+         toast.success("Login Successful");
+
   
        console.log("✅ Google User:", user);
       } catch (error) {
           console.error("❌ Google Auth Error", error);
+           toast.error("Login Failed");
       }
     };
   

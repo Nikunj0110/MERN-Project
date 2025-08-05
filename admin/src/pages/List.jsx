@@ -71,7 +71,7 @@ function List() {
                         {item.category}
                       </div>
                       <div className="md:text-[17px] text-[15px] text-black">
-                        ₹ {item.price}
+                        ₹ {item.price.toLocaleString('en-IN')}
                       </div>
                     </div>
                     <div className="w-[10%] h-[100%] bg-transparent flex items-center justify-center">

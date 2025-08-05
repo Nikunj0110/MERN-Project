@@ -3,11 +3,12 @@ import logo from "../assets/google.webp";
 import { useNavigate } from "react-router-dom";
 import { FiEye } from "react-icons/fi";
 import { FiEyeOff } from "react-icons/fi";
-import { authDataContext } from "../context/authContext";
+import { authDataContext } from "../context/AuthContext";
 import axios from "axios";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../utils/Firebase";
 import { userDataContext } from "../context/UserContext";
+import { toast } from "react-toastify";
 
 
 function Registration() {
@@ -17,8 +18,7 @@ function Registration() {
   let [name, setName] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
-  let {getCurrentUser}=useContext(userDataContext)
-  
+  let { getCurrentUser } = useContext(userDataContext);
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -33,10 +33,12 @@ function Registration() {
         { withCredentials: true }
       );
       console.log(result.data);
-      getCurrentUser()
-      navigate('/home')
+      getCurrentUser();
+      navigate("/home");
+
     } catch (error) {
       console.log(error);
+
     }
   };
 
@@ -44,19 +46,27 @@ function Registration() {
     try {
       const response = await signInWithPopup(auth, provider);
       const user = response.user;
-      let name=user.displayName
-      let email=user.email
+      let name = user.displayName;
+      let email = user.email;
 
-      const result =await axios.post(serverUrl+'/api/auth/googlelogin',{
-        name,email
-      },{withCredentials:true})
+      const result = await axios.post(
+        serverUrl + "/api/auth/googlelogin",
+        {
+          name,
+          email,
+        },
+        { withCredentials: true }
+      );
       console.log(result.data);
-         getCurrentUser()
-        navigate('/home')
+      toast.success("Login Successfull");
 
-     console.log("✅ Google User:", user);
+      getCurrentUser();
+      navigate("/home");
+
+      console.log("✅ Google User:", user);
     } catch (error) {
-        console.error("❌ Google Auth Error", error);
+      console.error("❌ Google Auth Error", error);
+      toast.error("Login Failed");
     }
   };
 

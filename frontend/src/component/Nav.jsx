@@ -6,7 +6,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { userDataContext } from "../context/UserContext";
 import { BiSolidSearch } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
-import { authDataContext } from '../context/AuthContext';
+import { authDataContext } from "../context/AuthContext";
 import axios from "axios";
 import { GoHome } from "react-icons/go";
 
@@ -14,11 +14,13 @@ import { HiOutlineCollection } from "react-icons/hi";
 import { RiContactsLine } from "react-icons/ri";
 import { FaOpencart } from "react-icons/fa";
 import { shopDataContext } from "../context/ShopContext";
+import { toast } from "react-toastify";
 
 function Nav() {
   let { getCurrentUser, userData } = useContext(userDataContext);
   let { serverUrl } = useContext(authDataContext);
-  let {showSearch, setShowSearch,search,setSearch,getCartCount} = useContext(shopDataContext);
+  let { showSearch, setShowSearch, search, setSearch, getCartCount } =
+    useContext(shopDataContext);
   let [showProfile, setShowProfile] = useState(false);
   let navigate = useNavigate();
 
@@ -28,16 +30,19 @@ function Nav() {
         withCredentials: true,
       });
       console.log(result.data);
+      toast.success("Logout Success");
+
       getCurrentUser();
     } catch (error) {
       console.log(error);
+      toast.error("Logout Failed");
     }
   };
 
   return (
     <div className="w-[100vw] h-[60px] z-10 fixed top-0 flex items-center justify-between md:px-[30px] px-[10px] bg-white shadow-lg shadow-gray-200 border-b border-gray-100 backdrop-blur-sm">
       <div className="md:w-[30%] w-[50%] flex items-center">
-          <img src={logo} className="w-[40px] h-[40px]" />
+        <img src={logo} className="w-[40px] h-[40px]" />
         <h1 className="text-[26px] font-semibold  bg-clip-text text-black tracking-tight -ml-2">
           peak Deals
         </h1>
@@ -79,7 +84,10 @@ function Nav() {
           <div className="p-[10px] hover:bg-gray-100 rounded-full transition-all duration-300 cursor-pointer group">
             <FaSearch
               className="h-[20px] w-[20px] cursor-pointer text-gray-600 group-hover:text-blue-600 transition-colors duration-300"
-              onClick={() => {setShowSearch((prev) => !prev);navigate('/collections')}}
+              onClick={() => {
+                setShowSearch((prev) => !prev);
+                navigate("/collections");
+              }}
             />
           </div>
         )}
@@ -111,7 +119,10 @@ function Nav() {
         )}
         <div className="relative hidden lg:block">
           <div className="p-[10px] hover:bg-gray-100 rounded-full transition-all duration-300 cursor-pointer group">
-            <IoCartOutline onClick={()=>navigate('/cart')} className="h-[24px] w-[24px] cursor-pointer text-gray-600 group-hover:text-blue-600 transition-colors duration-300" />
+            <IoCartOutline
+              onClick={() => navigate("/cart")}
+              className="h-[24px] w-[24px] cursor-pointer text-gray-600 group-hover:text-blue-600 transition-colors duration-300"
+            />
           </div>
           <div className="absolute w-[20px] h-[20px] flex items-center justify-center bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-full text-[10px] font-bold top-[2px] right-[2px] shadow-md">
             {getCartCount()}
@@ -126,7 +137,9 @@ function Nav() {
               type="text"
               className="w-[100%] h-[50px] bg-gray-50 border-2 border-gray-200 focus:border-blue-500 focus:bg-white rounded-2xl px-[50px] pr-[50px] placeholder:text-gray-500 text-gray-800 font-medium text-[16px] outline-none transition-all duration-300 shadow-sm focus:shadow-md"
               placeholder="Search for products..."
-              onChange={(e)=>{setSearch(e.target.value)}}
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
               value={search}
             />
             <BiSolidSearch className="absolute left-[18px] top-[50%] transform -translate-y-[50%] text-gray-400 w-[20px] h-[20px]" />
@@ -159,7 +172,10 @@ function Nav() {
                 Logout
               </li>
             )}
-            <li className="w-[100%] hover:bg-blue-50 px-[18px] py-[12px] cursor-pointer text-gray-700 hover:text-blue-600 transition-all duration-200 font-medium">
+            <li 
+              onClick={() => navigate("/order")}
+            
+            className="w-[100%] hover:bg-blue-50 px-[18px] py-[12px] cursor-pointer text-gray-700 hover:text-blue-600 transition-all duration-200 font-medium">
               Orders
             </li>
             <li
@@ -167,7 +183,7 @@ function Nav() {
               //   () => navigate("/about");
               //   setShowProfile(false);
               // }}
-          onClick={() => navigate("/about")}
+              onClick={() => navigate("/about")}
               className="w-[100%] hover:bg-blue-50 px-[18px] py-[12px] cursor-pointer text-gray-700 hover:text-blue-600 transition-all duration-200 font-medium"
             >
               About
@@ -199,7 +215,10 @@ function Nav() {
           <RiContactsLine className="w-[24px] h-[24px]" />
           <span className="text-[10px] font-medium">Contact</span>
         </button>
-        <button onClick={()=>navigate('/cart')} className="text-gray-600 hover:text-blue-600 flex items-center justify-center flex-col gap-[4px] py-[10px] px-[8px] rounded-xl hover:bg-blue-50 transition-all duration-300 active:scale-95 relative min-w-[60px]">
+        <button
+          onClick={() => navigate("/cart")}
+          className="text-gray-600 hover:text-blue-600 flex items-center justify-center flex-col gap-[4px] py-[10px] px-[8px] rounded-xl hover:bg-blue-50 transition-all duration-300 active:scale-95 relative min-w-[60px]"
+        >
           <FaOpencart className="w-[24px] h-[24px]" />
           <span className="text-[10px] font-medium">Cart</span>
           <div className="absolute w-[18px] h-[18px] flex items-center justify-center bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-full text-[9px] font-bold top-[0px] right-[10px] shadow-md">

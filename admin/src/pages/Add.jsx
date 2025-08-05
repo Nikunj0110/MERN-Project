@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react";
 import Nav from "../component/Nav";
 import Sidebar from "../component/Sidebar";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaSleigh } from "react-icons/fa";
 import { authDataContext } from "../context/AuthContext";
 import axios from 'axios'
+import { toast } from "react-toastify";
+import Loading from "../component/Loading";
 
 function Add() {
   let [image1, setImage1] = useState(false);
@@ -17,9 +19,12 @@ function Add() {
   let [price, setPrice] = useState("");
   let [bestseller, setBestseller] = useState(false);
 
+  const [loading,setLoading]=useState(false)
+
   let {serverUrl}=useContext(authDataContext)
 
   let handleAddProduct = async (e) => {
+    setLoading(true)
     e.preventDefault()
     try {
       let formData=new FormData()
@@ -36,6 +41,8 @@ function Add() {
       let result=await axios.post(serverUrl+"/api/product/addproduct",formData,{withCredentials:true})
 
       console.log(result.data);
+toast.success("Add Product Successfully")
+      setLoading(false)
 
       if(result.data){
         setName("")
@@ -50,6 +57,8 @@ function Add() {
       }
     } catch (error) {
       console.log(error);
+      toast.error("Add Product Failed")
+      setLoading(false)
     }
 
   };
@@ -258,7 +267,7 @@ function Add() {
               </label>
             </div>
             <button className="mt-[18px] text-[18px] w-[140px] px-[10px] py-[10px] rounded-xl flex bg-blue-600 items-center justify-center gap-[10px] text-white active:bg-blue-800 active:text-amber-50 active:border-[2px] border-black">
-              Add Product
+              {loading ? <Loading/> : "Add Product"}
             </button>
           </form>
         </div>

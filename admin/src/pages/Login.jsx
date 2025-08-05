@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { authDataContext } from "../context/AuthContext";
 import { adminDataContext } from "../context/AdminContext";
 import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 
 function Login() {
@@ -27,10 +28,12 @@ function Login() {
         { withCredentials: true }
       );
       console.log(result.data);
+      toast.success("Login Successfully")
       getAdmin()
       navigate('/')
     } catch (error) {
       console.log(error);
+      toast.error("Login Failed!")
     }
   };
   return (

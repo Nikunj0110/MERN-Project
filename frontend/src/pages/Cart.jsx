@@ -79,7 +79,7 @@ function Cart() {
                 }else{
                     console.log('Your Cart Is Empty')
                 }
-            }} className="text-[18px] font-400 cursor-pointer bg-blue-400 py-[10px] px-[50px] rounded-2xl text-black flex items-center justify-center gap-[20px]  ml-[30px] mt-[20px]">
+            }} className="text-[18px]  font-400 cursor-pointer bg-blue-800 py-[10px] px-[50px] rounded-xl text-white font-400 flex items-center justify-center gap-[20px]  ml-[30px] mt-[20px]">
                 Proceed To Chekout
             </button>
         </div>
