@@ -8,7 +8,7 @@ const MobileSlider = () => {
   const mobileData = [
     {
       id: 1,
-      title: "Explore Mobile Zone",
+      title: "Explore Speak Deals",
       description: "Experience the power of titanium with advanced camera system",
       features: ["48MP Camera", "A17 Pro Chip", "Titanium Build"],
       price: "$999",
@@ -16,7 +16,7 @@ const MobileSlider = () => {
     },
     {
       id: 2,
-      title: "Oneplus Smartphones",
+      title: "Explore Speak Deals",
       description: "AI-powered smartphone with incredible photography capabilities",
       features: ["200MP Camera", "Snapdragon 8 Gen 3", "AI Features"],
       price: "$899",
@@ -24,7 +24,7 @@ const MobileSlider = () => {
     },
     {
       id: 3,
-      title: "Google Launches",
+      title: "Explore Speak Deals",
       description: "Pure Android experience with computational photography",
       features: ["Google Tensor G3", "Magic Eraser", "Pure Android"],
       price: "$699",
@@ -32,7 +32,7 @@ const MobileSlider = () => {
     },
     {
       id: 4,
-      title: "Samsung's Newest",
+      title: "Explore Speak Deals",
       description: "Fast charging, smooth performance, premium design",
       features: ["100W Charging", "50MP Camera", "OxygenOS"],
       price: "$799",
@@ -44,7 +44,7 @@ const MobileSlider = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % mobileData.length);
-    }, 5000); // Change slide every 5 seconds
+    }, 3000); // Change slide every 5 seconds
 
     return () => clearInterval(interval);
   }, [mobileData.length]);
@@ -72,7 +72,7 @@ const MobileSlider = () => {
             {/* Text Content - Left Side */}
             <div className="w-full lg:w-1/2 text-center lg:text-left mb-10 lg:mb-0 lg:pr-12">
               <div className="space-y-6">
-                <h1 className="font-[Calibri] text-4xl sm:text-5xl lg:text-6xl font-medium text-gray-900 leading-tight">
+                <h1 className="font-[Calibri] text-4xl sm:text-5xl lg:text-6xl font-medium text-blue-500 leading-tight">
                   {mobileData[currentSlide].title}
                 </h1>
                 
@@ -127,7 +127,7 @@ const MobileSlider = () => {
         </div>
         
         {/* Navigation Arrows */}
-        <button 
+        {/* <button 
           onClick={prevSlide}
           className="absolute cursor-pointer  left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 text-gray-800 p-3 rounded-full shadow-lg transition-all duration-300 z-10"
         >
@@ -143,7 +143,7 @@ const MobileSlider = () => {
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
-        </button>
+        </button> */}
 
       </div>
       

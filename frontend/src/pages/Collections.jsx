@@ -123,7 +123,7 @@ function Collections() {
       <div className="lg:pl-[20%] md:py-[10px]">
         <div className=" md:w-[80vw] w-[100vw] p-[20px] flex justify-between flex-col lg:flex-row lg:px-[50px]">
           <Title text1={"All"} text2={" Collections"} />
-          <select onChange={(e)=>setSortType(e.target.value)} className="bg-blue-200 w-[60%] md:w-[200px] font-semibold h-[50px] px-[10px] text-black rounded-lg  ">
+          {/* <select onChange={(e)=>setSortType(e.target.value)} className="bg-blue-500 w-[60%] md:w-[200px] font-semibold h-[50px] px-[10px] text-white rounded-lg  ">
             <option value="relavent" className="w-[100%] font-sans font-semibold  h-[100%]">
               Sort By : Relavent
             </option>
@@ -133,7 +133,7 @@ function Collections() {
             <option value="high-low" className="w-[100%] font-sans font-semibold h-[100%]">
               Sort By : High to low
             </option>
-          </select>
+          </select> */}
         </div>
         <div className="lg:w-[80vw] md:w-[60vw] w-[100vw] min-h-[70vh] flex items-center justify-center flex-wrap gap-[30px]">
           {filterProduct.map((item, index) => (

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import logo from "../assets/main.png";
+import logo from "../assets/logo.png";
 import { FaSearch } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";

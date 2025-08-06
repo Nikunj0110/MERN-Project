@@ -38,14 +38,14 @@ function Order() {
     loadOrderData();
   }, []);
   return (
-    <div className="w-[99vw] pt-20 min-h-[100vh] p-[20px] pb-[150px] overflow-hidden bg-white ">
+    <div className="w-[99vw] pt-20 min-h-[100vh] p-[20px] pb-[150px] overflow-hidden bg-gray-50 ">
       <div className="h-[8%] w-[100%] text-center mt-[80px-]">
         <Title text1={"My"} text2={" Order"} />
       </div>
       <div className="w-[100%] h-[92%] flex flex-wrap gap-[20px]">
         {orderData.map((item, index) => (
           <div key={index} className="w-[100%] h-[10%]">
-            <div className="w-[100%] bg-[#51808048] py-[10px] px-[20px] rounded-2xl relative h-[80%] flex items-start gap-6 ">
+            <div className="w-[100%] bg-white py-[10px] px-[20px]  relative h-[80%] flex items-start gap-6 ">
               <img
                 src={item.image1}
                 className="w-[130px] h-[130px] rounded-md"
@@ -89,7 +89,7 @@ function Order() {
                 </div>
                 </div>
                 <div className="absolute md:right-[5%] right-[2%] md:top-[40%] top-[75%]">
-            <button className="px-[15px] py-[7px]  rounded-md bg-[#101919] text-white text-[12px] md:text-[16px] cursor-pointer active:bg-slate-500" onClick={loadOrderData}>
+            <button className="px-[15px] py-[7px]  rounded-md bg-blue-500 text-white text-[12px] md:text-[16px] cursor-pointer active:bg-slate-500" onClick={loadOrderData}>
               Track Order
             </button>
                 </div>
