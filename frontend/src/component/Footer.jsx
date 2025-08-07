@@ -16,7 +16,7 @@ const Footer = () => {
   const contactInfo = [
     { icon: <MdOutlineMarkEmailUnread />, text: "nikunju2005@gmail.com" },
     { icon: <LuPhoneCall />, text: "+1 (123) 456-7890" },
-    { icon: <FaLocationDot />, text: "123 Main St, City, Country" },
+    { icon: <FaLocationDot />, text: "B/204, Science City, Ahmedabad, India" },
   ];
 
   return (

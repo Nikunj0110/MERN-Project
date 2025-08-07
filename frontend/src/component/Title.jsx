@@ -12,3 +12,6 @@ function Title({ text1, text2 }) {
 }
 
 export default Title;
+
+
+

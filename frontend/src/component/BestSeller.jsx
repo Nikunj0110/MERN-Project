@@ -15,7 +15,7 @@ function BestSeller() {
   return (
     <div>
       <div className='h-[8%] w-[100%] text-center mt-[50px]'>
-       <Title text1={"Best"} text2={"Seller"} />
+       <Title text1={"Best"} text2={" Seller"} />
         <p className="w-[100%] m-auto text-[13px] md:text-[20px] px-[10px] text-black font-extralight">
           Tried, Tested, Loved, Discover Our All-Time Best Sellers.{" "}
         </p>

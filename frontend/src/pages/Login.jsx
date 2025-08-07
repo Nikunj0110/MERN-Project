@@ -4,12 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { FiEye } from "react-icons/fi";
 import { FiEyeOff } from "react-icons/fi";
 import { authDataContext } from "../context/AuthContext";
-import axios from 'axios'
+import axios from "axios";
 import { auth, provider } from "../../utils/Firebase";
 import { signInWithPopup } from "firebase/auth";
 import { userDataContext } from "../context/UserContext";
 import { toast } from "react-toastify";
-
 
 function Login() {
   let navigate = useNavigate();
@@ -17,48 +16,83 @@ function Login() {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let { serverUrl } = useContext(authDataContext);
-  let {getCurrentUser}=useContext(userDataContext)
+  let { getCurrentUser } = useContext(userDataContext);
 
   const handleLogin = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-        let result=await axios.post(serverUrl+'/api/auth/login',{
-          email,password
-        },{withCredentials:true})
-        console.log(result.data);
-        console.log("Login Successfull");
-        getCurrentUser()
-        navigate('/')
-        
-
+      let result = await axios.post(
+        serverUrl + "/api/auth/login",
+        {
+          email,
+          password,
+        },
+        { withCredentials: true }
+      );
+      console.log(result.data);
+      console.log("Login Successfull");
+      getCurrentUser();
+      navigate("/");
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   };
 
-   const googleLogin = async () => {
-      try {
-        const response = await signInWithPopup(auth, provider);
-        const user = response.user;
-        let name=user.displayName
-        let email=user.email
-  
-        const result =await axios.post(serverUrl+'/api/auth/googlelogin',{
-          name,email
-        },{withCredentials:true})
-        console.log(result.data);
-           getCurrentUser()
-           navigate('/home')
-         toast.success("Login Successful");
+  //  const googleLogin = async () => {
+  //     try {
+  //       const response = await signInWithPopup(auth, provider);
+  //       const user = response.user;
+  //       let name=user.displayName
+  //       let email=user.email
 
-  
-       console.log("✅ Google User:", user);
-      } catch (error) {
-          console.error("❌ Google Auth Error", error);
-           toast.error("Login Failed");
+  //       const result =await axios.post(serverUrl+'/api/auth/googlelogin',{
+  //         name,email
+  //       },{withCredentials:true})
+  //       console.log(result.data);
+  //          getCurrentUser()
+  //          navigate('/home')
+  //        toast.success("Login Successful");
+
+  //      console.log("✅ Google User:", user);
+  //     } catch (error) {
+  //         console.error("❌ Google Auth Error", error);
+  //          toast.error("Login Failed");
+  //     }
+  //   };
+
+  const googleLogin = async () => {
+    try {
+      const response = await signInWithPopup(auth, provider);
+      const user = response.user;
+
+      // Only proceed if popup completed successfully
+      const result = await axios.post(
+        `${serverUrl}/api/auth/googlelogin`,
+        {
+          name: user.displayName,
+          email: user.email,
+        },
+        { withCredentials: true }
+      );
+
+      getCurrentUser();
+      navigate("/home");
+      toast.success("Login Successful");
+    } catch (error) {
+      // Silent handling for popup closure
+      if (error.code === "auth/popup-closed-by-user") {
+        return; // Exit silently
       }
-    };
-  
+
+      // Handle other errors
+      console.error("Login Error:", error);
+      toast.error(
+        error.code === "auth/web-storage-unsupported"
+          ? "Please enable third-party cookies"
+          : "Login failed. Please try again."
+      );
+    }
+  };
 
   return (
     <div className="w-[100vw] h-[100vh] bg-white flex flex-col items-center justify-start">
@@ -83,7 +117,10 @@ function Login() {
           onSubmit={handleLogin}
           className="w-[90%] h-[90%] flex flex-col items-center justify-start gap-[20px]"
         >
-          <div onClick={googleLogin} className="w-[90%] h-[50px] bg-[#42656cae] rounded-lg flex items-center justify-center gap-[10px] py-[20px] cursor-pointer">
+          <div
+            onClick={googleLogin}
+            className="w-[90%] h-[50px] bg-[#42656cae] rounded-lg flex items-center justify-center gap-[10px] py-[20px] cursor-pointer"
+          >
             <img src={logo} className="w-[40px]" />
             Registration With Google
           </div>
@@ -96,7 +133,8 @@ function Login() {
             <input
               type="text"
               placeholder="Email"
-              onChange={(e)=>setEmail(e.target.value)} value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
               required
               className="w-[100%] h-[50px] border-[2px] border-[#96969635] backdrop:blur-sm 
                rounded-lg shadow-lg bg-white placeholder-black px-[20px] font-semibold"
@@ -104,7 +142,8 @@ function Login() {
             <input
               type={show ? "text" : "password"}
               placeholder="Password"
-              onChange={(e)=>setPassword(e.target.value)} value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
               required
               className="w-[100%] h-[50px] border-[2px] border-[#96969635] backdrop:blur-sm 
                rounded-lg shadow-lg bg-white placeholder-black px-[20px] font-semibold"
@@ -122,7 +161,7 @@ function Login() {
               />
             )}
             <button
-            type="submit"
+              type="submit"
               className="w-[100%] h-[50px] bg-[#6060f5] flex items-center justify-center mt-[20px]
                rounded-lg text-[17px] font-semibold"
             >
