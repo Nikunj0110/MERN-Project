@@ -107,7 +107,7 @@ function Login() {
       <div className="w-[100%] h-[100px] flex items-center justify-center gap-[10px] flex-col">
         <span className="text-3xl font-semibold">Login Page</span>
         <span className="text-[16px]">
-          Welcome to Mobail Zone, Place your order!
+          Welcome to Speak Deals, Place your order!
         </span>
       </div>
 
