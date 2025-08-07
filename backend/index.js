@@ -18,7 +18,7 @@ let port=process.env.PORT || 6000
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin:["https://speak-deals-frontend.onrender.com","http://localhost:5174"],
+    origin:["https://speak-deals-frontend.onrender.com","https://speak-deals-admin.onrender.com"],
     credentials:true
 }))
 
