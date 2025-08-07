@@ -193,7 +193,7 @@ function Nav() {
       )}
 
       {/* FOR RESPONSIVE USE ONLY  */}
-      <div className="w-[100vw] h-[60px] flex items-center justify-between px-[20px] fixed bottom-0  left-0 bg-white shadow-[0_-8px_25px_-5px_rgba(0,0,0,0.1)] border-t border-gray-100 md:hidden backdrop-blur-sm z-50">
+      <div className="w-[100vw] h-[60px] flex items-center top-162 justify-between px-[20px] fixed bottom-0  left-0 bg-white shadow-[0_-8px_25px_-5px_rgba(0,0,0,0.1)] border-t border-gray-100 md:hidden backdrop-blur-sm z-50">
         <button
           onClick={() => navigate("/home")}
           className="text-gray-600 hover:text-blue-600 flex items-center justify-center flex-col gap-[4px] py-[10px] px-[8px] rounded-xl hover:bg-blue-50 transition-all duration-300 active:scale-95 min-w-[60px]"
