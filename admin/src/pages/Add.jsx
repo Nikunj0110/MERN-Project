@@ -233,7 +233,13 @@ toast.success("Add Product Successfully")
                   <option>Select</option>
                   <option value="Samsung">Samsung</option>
                   <option value="Apple">Apple</option>
+                  <option value="Google">Google</option>
                   <option value="Oppo">Oppo</option>
+                  <option value="Vivo">Vivo</option>
+                  <option value="Xiaomi">Xiaomi</option>
+                  <option value="Realme">Realme</option>
+                  <option value="Motorola">Motorola</option>
+                  <option value="Nothing">Nothing</option>
                 </select>
               </div>
             </div>

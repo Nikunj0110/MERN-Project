@@ -38,6 +38,9 @@ function Cart() {
           const productData = products.find(
             (product) => product._id === item._id
           );
+
+if (!productData) return null;
+
           return (
             <div key={index} className="w-[100%] h-[10%]">
               <div className="w-[100%] h-[80%] flex items-start gap-6 bg-gray-200 py-[10px] px-[20px] rounded-2xl relative">
@@ -51,7 +54,7 @@ function Cart() {
                   </p>
                   <div className="flex items-start gap-[20px]">
                     <p className="text-[20px] text-black">
-                      {currency} {productData.price}
+                      {currency} {productData.price.toLocaleString('en-IN')}
                     </p>
                   </div>
                 </div>

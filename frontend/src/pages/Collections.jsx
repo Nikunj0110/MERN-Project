@@ -7,7 +7,7 @@ import { shopDataContext } from "../context/ShopContext";
 
 function Collections() {
   let [showFilter, setShowFilter] = useState(false);
-  let { products,search,showSearch } = useContext(shopDataContext);
+  let { products, search, showSearch } = useContext(shopDataContext);
   let [filterProduct, setFilterProduct] = useState([]);
   let [category, setCategory] = useState([]);
   let [sortType, setSortType] = useState("relavent");
@@ -15,8 +15,10 @@ function Collections() {
   const applyFilter = () => {
     let productCopy = products.slice();
 
-    if(showSearch && search ){
-      productCopy=productCopy.filter(item=>item.name.toLowerCase().includes(search.toLowerCase()))
+    if (showSearch && search) {
+      productCopy = productCopy.filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase())
+      );
     }
     if (category.length > 0) {
       productCopy = productCopy.filter((item) =>
@@ -27,27 +29,27 @@ function Collections() {
     setFilterProduct(productCopy);
   };
 
-  const sortProducts=(e)=>{
-    let fbCopy=filterProduct.slice()
+  const sortProducts = (e) => {
+    let fbCopy = filterProduct.slice();
 
-    switch(sortType){
-      case 'low-high':
-        setFilterProduct(fbCopy.sort((a,b)=>(a.price-b.price)))
+    switch (sortType) {
+      case "low-high":
+        setFilterProduct(fbCopy.sort((a, b) => a.price - b.price));
         break;
 
-        case 'high-low':
-        setFilterProduct(fbCopy.sort((a,b)=>(b.price-a.price)))
+      case "high-low":
+        setFilterProduct(fbCopy.sort((a, b) => b.price - a.price));
         break;
 
-        default:
-          applyFilter()
-          break
+      default:
+        applyFilter();
+        break;
     }
-  }
+  };
 
-  useEffect(()=>{
-    sortProducts()
-  },[sortType])
+  useEffect(() => {
+    sortProducts();
+  }, [sortType]);
 
   useEffect(() => {
     setFilterProduct(products);
@@ -55,7 +57,7 @@ function Collections() {
 
   useEffect(() => {
     applyFilter();
-  }, [category,search,showSearch]);
+  }, [category, search, showSearch]);
 
   const toggleCategory = (e) => {
     if (category.includes(e.target.value)) {
@@ -81,41 +83,181 @@ function Collections() {
           {showFilter && <FaAngleDown className="text-[18px] md:hidden" />}
         </p>
         <div
-          className={`border-[2px] border-white shadow-lg pl-5 py-3 mt-6 rounded-md bg-white ${
+          className={`border-[2px] border-white shadow-lg pl-5   rounded-md bg-white ${
             showFilter ? "" : "hidden"
           } md:block`}
         >
-          <p className="text-[20px] text-black">Categories</p>
-          <div className="w-[230px] h-[120px] flex items-start justify-center gap-[10px] flex-col">
-            <p className="flex items-center justify-center gap-[10px] text-[16px] font-light">
-              <input
-                type="checkbox"
-                onChange={toggleCategory}
-                value={"Samsung"}
-                className="w-3"
-              />
-              Samsung
-            </p>
+          <div className="w-full max-w-md p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Brands</h3>
+            <div className="flex flex-col space-y-3">
+              {/* First Row */}
+              <div className="flex flex-wrap gap-4">
+                {/* Samsung */}
+                <div className="flex items-center w-[calc(50%-8px)] min-w-[120px]">
+                  <input
+                    id="samsung-checkbox"
+                    type="checkbox"
+                    onChange={toggleCategory}
+                    value="Samsung"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <label
+                    htmlFor="samsung-checkbox"
+                    className="ml-2 text-sm font-medium text-gray-700"
+                  >
+                    Samsung
+                  </label>
+                </div>
 
-            <p className="flex items-center justify-center gap-[10px] text-[16px] font-light">
-              <input
-                type="checkbox"
-                onChange={toggleCategory}
-                value={"Apple"}
-                className="w-3"
-              />
-              Apple
-            </p>
+                {/* Apple */}
+                <div className="flex items-center w-[calc(50%-8px)] min-w-[120px]">
+                  <input
+                    id="apple-checkbox"
+                    type="checkbox"
+                    onChange={toggleCategory}
+                    value="Apple"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <label
+                    htmlFor="apple-checkbox"
+                    className="ml-2 text-sm font-medium text-gray-700"
+                  >
+                    Apple
+                  </label>
+                </div>
+              </div>
 
-            <p className="flex items-center justify-center gap-[10px] text-[16px] font-light">
-              <input
-                type="checkbox"
-                onChange={toggleCategory}
-                value={"Oppo"}
-                className="w-3"
-              />
-              Oppo
-            </p>
+              {/* Second Row */}
+              <div className="flex flex-wrap gap-4">
+                {/* Google */}
+                <div className="flex items-center w-[calc(50%-8px)] min-w-[120px]">
+                  <input
+                    id="google-checkbox"
+                    type="checkbox"
+                    onChange={toggleCategory}
+                    value="Google"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <label
+                    htmlFor="google-checkbox"
+                    className="ml-2 text-sm font-medium text-gray-700"
+                  >
+                    Google
+                  </label>
+                </div>
+
+                {/* Xiaomi */}
+                <div className="flex items-center w-[calc(50%-8px)] min-w-[120px]">
+                  <input
+                    id="xiaomi-checkbox"
+                    type="checkbox"
+                    onChange={toggleCategory}
+                    value="Xiaomi"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <label
+                    htmlFor="xiaomi-checkbox"
+                    className="ml-2 text-sm font-medium text-gray-700"
+                  >
+                    Xiaomi
+                  </label>
+                </div>
+              </div>
+
+              {/* Third Row */}
+              <div className="flex flex-wrap gap-4">
+                {/* Oppo */}
+                <div className="flex items-center w-[calc(50%-8px)] min-w-[120px]">
+                  <input
+                    id="oppo-checkbox"
+                    type="checkbox"
+                    onChange={toggleCategory}
+                    value="Oppo"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <label
+                    htmlFor="oppo-checkbox"
+                    className="ml-2 text-sm font-medium text-gray-700"
+                  >
+                    Oppo
+                  </label>
+                </div>
+
+                {/* Realme */}
+                <div className="flex items-center w-[calc(50%-8px)] min-w-[120px]">
+                  <input
+                    id="realme-checkbox"
+                    type="checkbox"
+                    onChange={toggleCategory}
+                    value="Realme"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <label
+                    htmlFor="realme-checkbox"
+                    className="ml-2 text-sm font-medium text-gray-700"
+                  >
+                    Realme
+                  </label>
+                </div>
+              </div>
+
+              {/* Fourth Row */}
+              <div className="flex flex-wrap gap-4">
+                {/* Vivo */}
+                <div className="flex items-center w-[calc(50%-8px)] min-w-[120px]">
+                  <input
+                    id="vivo-checkbox"
+                    type="checkbox"
+                    onChange={toggleCategory}
+                    value="Vivo"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <label
+                    htmlFor="vivo-checkbox"
+                    className="ml-2 text-sm font-medium text-gray-700"
+                  >
+                    Vivo
+                  </label>
+                </div>
+
+                {/* Motorola */}
+                <div className="flex items-center w-[calc(50%-8px)] min-w-[120px]">
+                  <input
+                    id="motorola-checkbox"
+                    type="checkbox"
+                    onChange={toggleCategory}
+                    value="Motorola"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <label
+                    htmlFor="motorola-checkbox"
+                    className="ml-2 text-sm font-medium text-gray-700"
+                  >
+                    Motorola
+                  </label>
+                </div>
+              </div>
+
+              {/* Fifth Row */}
+              <div className="flex flex-wrap gap-4">
+                {/* Nothing */}
+                <div className="flex items-center w-[calc(50%-8px)] min-w-[120px]">
+                  <input
+                    id="nothing-checkbox"
+                    type="checkbox"
+                    onChange={toggleCategory}
+                    value="Nothing"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <label
+                    htmlFor="nothing-checkbox"
+                    className="ml-2 text-sm font-medium text-gray-700"
+                  >
+                    Nothing
+                  </label>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -123,17 +265,6 @@ function Collections() {
       <div className="lg:pl-[20%] md:py-[10px]">
         <div className=" md:w-[80vw] w-[100vw] p-[20px] flex justify-between flex-col lg:flex-row lg:px-[50px]">
           <Title text1={"All"} text2={" Collections"} />
-          {/* <select onChange={(e)=>setSortType(e.target.value)} className="bg-blue-500 w-[60%] md:w-[200px] font-semibold h-[50px] px-[10px] text-white rounded-lg  ">
-            <option value="relavent" className="w-[100%] font-sans font-semibold  h-[100%]">
-              Sort By : Relavent
-            </option>
-            <option value="low-high" className="w-[100%] font-sans font-semibold h-[100%]">
-              Sort By : Low to high
-            </option>
-            <option value="high-low" className="w-[100%] font-sans font-semibold h-[100%]">
-              Sort By : High to low
-            </option>
-          </select> */}
         </div>
         <div className="lg:w-[80vw] md:w-[60vw] w-[100vw] min-h-[70vh] flex items-center justify-center flex-wrap gap-[30px]">
           {filterProduct.map((item, index) => (
@@ -141,7 +272,7 @@ function Collections() {
               key={index}
               id={item._id}
               name={item.name}
-              price={item.price}
+              price={item.price.toLocaleString("en-IN")}
               image={item.image1}
             />
           ))}

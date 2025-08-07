@@ -57,7 +57,7 @@ function Order() {
                 <div className="flex items-center gap-[8px] md:gap-[20px]">
                   <p className="md:text-[18px] text-[12px] text-black">
                     {currency}
-                    {item.price}
+                    {item.price.toLocaleString('en-IN')}
                   </p>
 
                   <p className="md:text-[18px] text-[12px] text-black">
